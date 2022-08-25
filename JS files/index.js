@@ -14,7 +14,7 @@ image.onload = () =>{ //loads the image onto the html ++++ things created below 
 
 image.src ='img/gameMap.png' //calls the source of the image
 
-//console.log(placementTilesData)
+console.log(waypoints)
 
 class Enemy {
     constructor({position = {x: 0, y: 0}}){ //constructs the enemy obj
