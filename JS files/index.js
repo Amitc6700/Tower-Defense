@@ -14,46 +14,60 @@ image.onload = () =>{ //loads the image onto the html ++++ things created below 
 
 image.src ='img/gameMap.png' //calls the source of the image
 
+//console.log(placementTilesData)
+
 class Enemy {
     constructor({position = {x: 0, y: 0}}){ //constructs the enemy obj
-        this.position = position;
-        this.width = 10; //gives enemy a height and width
-        this.height = 10;
-        this.waypointIndex = 0;
+        this.position = position
+        this.width = 10 //gives enemy a height and width
+        this.height = 10
+        this.waypointIndex = 0
+        this.center = {
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        }
     }
 
     draw(){ //draw is arbitrarily named. Can be anything
     context.fillStyle ='red'
     context.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
-    update(){
-        this.draw();
 
-        const waypoint = waypoints[this.waypointIndex]; //grabs the first waypoint array x=0,y=0
-        const yDistance = waypoint.y - this.position.y; //subtracts the first waypoint, to the new position (bottom of right triangle minus the top of the right triangle). VERY IMPORTANT!!!! use y distance first.
-        const xDistance = waypoint.x - this.position.x;
-        const angle = Math.atan2(yDistance, xDistance); //Trigonometry of a right triangle. Stored in radians (checks the angle of a right triangle)
+    update(){
+        this.draw()
+
+        const waypoint = waypoints[this.waypointIndex] //grabs the first waypoint array x=0,y=0
+        const yDistance = waypoint.y - this.center.y //subtracts the first waypoint, to the new position (bottom of right triangle minus the top of the right triangle). VERY IMPORTANT!!!! use y distance first.
+        const xDistance = waypoint.x - this.center.x
+        const angle = Math.atan2(yDistance, xDistance) //Trigonometry of a right triangle. Stored in radians (checks the angle of a right triangle)
         this.position.x +=Math.cos(angle) //velocities
-        this.position.y +=Math.sin(angle) 
+        this.position.y +=Math.sin(angle)
+        this.center = {
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        }
 
         console.log(Math.round(this.position.x))
 
-        if (Math.round(this.position.x) === Math.round(waypoint.x) &&
-            Math.round(this.position.y) === Math.round(waypoint.y)&&
+        if (Math.round(this.center.x) === Math.round(waypoint.x) &&
+            Math.round(this.center.y) === Math.round(waypoint.y)&&
             this.waypointIndex < waypoints.length - 1){
-            this.waypointIndex++;
+            this.waypointIndex++
         }
     }
 }
-
-const enemy = new Enemy({position: {x:20, y: 20}}); //creates an enemy that moves
-const enemy2 = new Enemy({position: {x:0, y: 20}}); //creates an enemy that moves
+const enemies = []
+for (let i = 0; i < 10; i++){
+    const xOffset = i * 50
+    enemies.push(new Enemy({position: {x: -40.3333333333333 - xOffset, y: 73} }))
+}
 
 function animate(){ //animation function
     requestAnimationFrame(animate) //allows frame refreshes
 
-    context.drawImage(image,0 ,0) //Our map
-    enemy.update();
-    enemy2.update();
+    context.drawImage(image, 0, 0) //Our map
+    enemies.forEach(enemy =>{
+        enemy.update()
+    })
 }
 
