@@ -3,6 +3,7 @@ class PlacementTile { //constructs the placement tiles
         this.position = position
         this.size = 16 //size of the pixel asset
         this.color = 'rgba(255, 255, 255, .3)' //rgba takes 3 args that determines the color. Using 0-255. A is Alpha 0-1. 0 is transparent, 1 is completely solid
+        this.occupied = false
     }
 
     draw() {
@@ -13,14 +14,28 @@ class PlacementTile { //constructs the placement tiles
     update(mouse) { //checks for mouse collision
         this.draw()
 
-        if (mouse.x > this.position.x && mouse.x < this.position.x + this.size && 
-            mouse.y > this.position.y && mouse.y < this.position.y + this.size) { //if the mouse position is greater than the position of the placement tile that is being looped over. Grabs the left, right, up, down, + size of tile
+        if (mouse.x > this.position.x &&
+            mouse.x < this.position.x + this.size && 
+            mouse.y > this.position.y && 
+            mouse.y < this.position.y + this.size) { //if the mouse position is greater than the position of the placement tile that is being looped over. Grabs the left, right, up, down, + size of tile
             // console.log('Colliding') // prints colliding when colliding with a placement tile
             this.color = 'white' //turns tile white when hovered over
         }
         else this.color = 'rgba(255, 255, 255, .3)'
     }
 
+}
+
+class Building { //creates a building when clicked on an active tile. Makes it blue
+    constructor({position = {x:0, y:0}}){
+        this.position = position
+        this.width = 16
+        this.length = 16 * -2
+    }
+    draw(){
+        context.fillStyle = 'blue'
+        context.fillRect(this.position.x, this.position.y, this.width, this.length)
+    }
 }
 
 class Enemy {
@@ -64,3 +79,4 @@ class Enemy {
         }
     }
 }
+
