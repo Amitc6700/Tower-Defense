@@ -27,5 +27,3 @@ const waypoints = [
      "x":384,
      "y":70
     }]
-
-   // module.exports = {waypoints};

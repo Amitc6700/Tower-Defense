@@ -30,11 +30,11 @@ class Building { //creates a building when clicked on an active tile. Makes it b
     constructor({position = {x:0, y:0}}){
         this.position = position
         this.width = 16
-        this.length = 16 * -2
+        this.height = -16 && 16 
     }
     draw(){
         context.fillStyle = 'blue'
-        context.fillRect(this.position.x, this.position.y, this.width, this.length)
+        context.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
 
