@@ -8,13 +8,11 @@ context.fillStyle = 'white' //Fills the rectangle with the white color
 context.fillRect(0, 0, canvas.width, canvas.height)
 
 const image = new Image() //creates a new image object
-image.onload = () =>{ //loads the image onto the html ++++ things created below this will be "under" the map
+
+image.onload = () =>{ //loads the image onto the html
    animate()
 }
-
 image.src ='img/gameMap.png' //calls the source of the image
-
-console.log(waypoints)
 
 class Enemy {
     constructor({position = {x: 0, y: 0}}){ //constructs the enemy obj
