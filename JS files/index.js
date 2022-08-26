@@ -9,6 +9,11 @@ context.fillRect(0, 0, canvas.width, canvas.height)
 
 const image = new Image() //creates a new image object
 
+
+const {waypointy} = require('./waypoints.js')
+
+
+
 image.onload = () =>{ //loads the image onto the html
    animate()
 }
@@ -34,7 +39,7 @@ class Enemy {
     update(){
         this.draw()
 
-        const waypoint = waypoints[this.waypointIndex] //grabs the first waypoint array x=0,y=0
+        const waypoint = waypointy[this.waypointIndex] //grabs the first waypoint array x=0,y=0
         const yDistance = waypoint.y - this.center.y //subtracts the first waypoint, to the new position (bottom of right triangle minus the top of the right triangle). VERY IMPORTANT!!!! use y distance first.
         const xDistance = waypoint.x - this.center.x
         const angle = Math.atan2(yDistance, xDistance) //Trigonometry of a right triangle. Stored in radians (checks the angle of a right triangle)
@@ -49,7 +54,7 @@ class Enemy {
 
         if (Math.round(this.center.x) === Math.round(waypoint.x) &&
             Math.round(this.center.y) === Math.round(waypoint.y)&&
-            this.waypointIndex < waypoints.length - 1){
+            this.waypointIndex < waypointy.length - 1){
             this.waypointIndex++
         }
     }
