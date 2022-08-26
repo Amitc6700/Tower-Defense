@@ -28,4 +28,4 @@ const waypoints = [
      "y":70
     }]
 
-    module.exports = {waypoints};
+   // module.exports = {waypoints};
