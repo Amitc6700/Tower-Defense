@@ -13,8 +13,7 @@
     {
      "export":
         {
-         "format":"js",
-         "target":"..\/tower def.js"
+         "format":"js"
         }
     },
  "height":20,
@@ -170,7 +169,7 @@
          "name":"Monster ref",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":20,
          "x":0,
          "y":0

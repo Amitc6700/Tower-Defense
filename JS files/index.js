@@ -7,6 +7,41 @@ canvas.height = 320 //canvas height derived from the tile tool
 context.fillStyle = 'white' //Fills the rectangle with the white color
 context.fillRect(0, 0, canvas.width, canvas.height)
 
+//console.log(placementTilesData)
+const placementTilesData2D = [] //creates an array variable
+
+for (let i=0; i < placementTilesData.length; i+=20){ //For loop that will separate the first 20 items of the array and make them their own array and so on
+    placementTilesData2D.push(placementTilesData.slice(i, i+20)) //The 20 is gathered from the amount of tiles on the top of the map (20 tiles). Results should be 20 arrays with 20 data points
+}
+
+class PlacementTile{ //constructs the placement tiles
+    constructor({position = {x: 0, y: 0}}){
+        this.position = position
+        this.size = 16 //size of the pixel asset
+    }
+    draw(){
+        context.fillRect(this.position.x, this.position.y, this.size, this.size) //draws out the tiles according to their size
+    }
+}
+
+const placementTiles = [] //creates a blank array for placementTiles (will be used below)
+
+placementTilesData2D.forEach((row,y)=>{ //using each row, grab the Y coordinate
+    row.forEach((symbol, x)=>{  //for each symbol,grab the x coord
+        if (symbol === 389){ //Symbol is looking for a specific symbol in the data. In this case, 389 (the code for a placement tile)
+            //add building placement tile here
+            placementTiles.push(new PlacementTile({
+               position: {
+                x: x * 16,  
+                y: y * 16 //Y * 16 (the tile size this places it along the Y axis)
+               }  // should console.log out 68 placement tiles
+            }))
+        }
+    })
+})
+
+console.log(placementTiles)
+
 const image = new Image() //creates a new image object
 
 image.onload = () =>{ //loads the image onto the html
@@ -58,7 +93,7 @@ class Enemy {
 const enemies = []
 for (let i = 0; i < 10; i++){
     const xOffset = i * 50
-    enemies.push(new Enemy({position: {x: -40.3333333333333 - xOffset, y: 73} }))
+    enemies.push(new Enemy({position: {x: waypoints[0].x - xOffset, y: waypoints[0].y} }))
 }
 
 function animate(){ //animation function
