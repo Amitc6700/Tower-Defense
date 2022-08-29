@@ -70,11 +70,39 @@ class Enemy {
     }
 }
 
+class Projectile{
+    constructor({position = { x:0, y:0}}) { //classes always need constructors to give it properties. Projectile needs a position argument to work. 0, 0 is basically just a placeholder until a true position is passed through
+        this.position = position
+        this.velocity = { // doesnt need to be created by position above
+            x:0,
+            y:0
+        }
+    }
+    draw(){
+        context.beginPath() //this path will be an arc
+        context.arc(this.position.x, this.position.y, 3, 0, Math.PI * 2) //this allows us to draw an arc to turn into 360 to make a circle. Takes arguments: X position, Y position, radius, radians. Pi =  1/2 circle in radians. x2 that to get full circle
+        context.fillStyle = 'orange' //colors it orange
+        context.fill() //fills it out
+    }
+}
+
 class Building { //creates a building when clicked on an active tile. Makes it blue
     constructor({position = {x:0, y:0}}){
         this.position = position
         this.width = 16
-        this.height = -32
+        this.height = -32 // - number so it goes up on the grid
+        this.center = { 
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height / 2
+        }
+        this.projectiles = [
+            new Projectile({
+                position: {
+                    x: this.center.x, // shoots from top right of building
+                    y: this.center.y
+                }
+            })
+        ]
     }
     draw(){
         context.fillStyle = 'blue'

@@ -62,7 +62,12 @@ function animate() { //animation function
 
     buildings.forEach(building => {
         building.draw()
+
+        building.projectiles.forEach(projectile=>{
+            projectile.draw()
+        })
     })
+
 
 }
 
