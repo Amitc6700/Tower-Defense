@@ -26,17 +26,7 @@ class PlacementTile { //constructs the placement tiles
 
 }
 
-class Building { //creates a building when clicked on an active tile. Makes it blue
-    constructor({position = {x:0, y:0}}){
-        this.position = position
-        this.width = 16
-        this.height = -16 && 16 
-    }
-    draw(){
-        context.fillStyle = 'blue'
-        context.fillRect(this.position.x, this.position.y, this.width, this.height)
-    }
-}
+
 
 class Enemy {
     constructor({ position = { x: 0, y: 0 } }) { //constructs the enemy obj
@@ -80,3 +70,14 @@ class Enemy {
     }
 }
 
+class Building { //creates a building when clicked on an active tile. Makes it blue
+    constructor({position = {x:0, y:0}}){
+        this.position = position
+        this.width = 16
+        this.height = -32
+    }
+    draw(){
+        context.fillStyle = 'blue'
+        context.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}

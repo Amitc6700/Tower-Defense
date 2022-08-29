@@ -77,7 +77,7 @@ canvas.addEventListener('click', (event)=> {
             new Building({
             position: {
                 x: activeTile.position.x,
-                y: activeTile.position.y
+                y: activeTile.position.y + 16
             }
         }))
         activeTile.isOccupied = true
