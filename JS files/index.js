@@ -64,7 +64,7 @@ function animate() { //animation function
         building.draw()
 
         building.projectiles.forEach(projectile=>{
-            projectile.draw()
+            projectile.update()
         })
     })
 

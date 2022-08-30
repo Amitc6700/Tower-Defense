@@ -84,6 +84,14 @@ class Projectile{
         context.fillStyle = 'orange' //colors it orange
         context.fill() //fills it out
     }
+    update(){
+        this.draw()
+        const angle = Math.atan2(enemies[0].position.y  - this.position.y, enemies[0].position.x - this.position.x) //gives us Y distance from the enemy to the projectile. The hypotenuse of a right triangle, then does the same for X
+        this.velocity.x = Math.cos(angle)
+        this.velocity.y = Math.sin(angle)
+        this.position.x += this.velocity.x 
+        this.position.y += this.velocity.y
+    }
 }
 
 class Building { //creates a building when clicked on an active tile. Makes it blue
